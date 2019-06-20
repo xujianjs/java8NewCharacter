@@ -26,7 +26,9 @@ public class Executors2 {
             }
         });
 
-        future.get(1, TimeUnit.SECONDS);
+//        Integer result = future.get(1, TimeUnit.SECONDS);
+        Integer result = future.get(3, TimeUnit.SECONDS);
+        System.out.println(result);
     }
 
     private static void test2() throws InterruptedException, ExecutionException {
