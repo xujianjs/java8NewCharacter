@@ -14,7 +14,8 @@ public class CompletableFuture1 {
         future.complete("42");
 
         future
-                .thenAccept(System.out::println)
+            .thenAccept(v->System.out.println(v))
+            .thenAccept(System.out::println)
                 .thenAccept(v -> System.out.println("done"));
 
     }
