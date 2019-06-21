@@ -33,7 +33,10 @@ public class Executors1 {
         try {
             System.out.println("attempt to shutdown executor");
             executor.shutdown();
-            executor.awaitTermination(5, TimeUnit.SECONDS);
+            //* Blocks until all tasks have completed execution after a shutdown
+            //     * request, or the timeout occurs, or the current thread is
+            //     * interrupted, whichever happens first.
+            executor.awaitTermination(2, TimeUnit.SECONDS);
         }
         catch (InterruptedException e) {
             System.err.println("termination interrupted");

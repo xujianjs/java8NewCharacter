@@ -10,9 +10,9 @@ import java.util.concurrent.*;
 public class Executors3 {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        test1();
+//        test1();
 //        test2();
-//        test3();
+        test3();
 
 //        test4();
 //        test5();
@@ -75,6 +75,13 @@ public class Executors3 {
             }
         };
 
+        //Creates and executes a periodic action that becomes enabled first
+        //     * after the given initial delay, and subsequently with the
+        //     * given delay between the termination of one execution and the
+        //     * commencement of the next.  If any execution of the task
+        //     * encounters an exception, subsequent executions are suppressed.
+        //     * Otherwise, the task will only terminate via cancellation or
+        //     * termination of the executor.
         executor.scheduleWithFixedDelay(task, 0, 1, TimeUnit.SECONDS);
     }
 
@@ -83,20 +90,32 @@ public class Executors3 {
         Runnable task = () -> System.out.println("Scheduling: " + System.nanoTime());
         int initialDelay = 0;
         int period = 1;
+        //为了调度任务持续的执行，executors 提供了两个方法scheduleAtFixedRate()和scheduleWithFixedDelay()。第一个方法用来以固定频率来执行一个任务
+        //Creates and executes a periodic action that becomes enabled first
+        //     * after the given initial delay, and subsequently with the given
+        //     * period; that is executions will commence after
+        //     * {@code initialDelay} then {@code initialDelay+period}, then
+        //     * {@code initialDelay + 2 * period}, and so on.
+        //     * If any execution of the task
+        //     * encounters an exception, subsequent executions are suppressed.
+        //     * Otherwise, the task will only terminate via cancellation or
+        //     * termination of the executor.  If any execution of this task
+        //     * takes longer than its period, then subsequent executions
+        //     * may start late, but will not concurrently execute.
         executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
     }
 
     private static void test1() throws InterruptedException {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
-        Runnable task = () -> System.out.println("Scheduling: " + System.nanoTime());
+        Runnable task = () -> System.out.println(Thread.currentThread().getName()+"=》Scheduling: " + System.nanoTime());
         int delay = 3;
         ScheduledFuture<?> future = executor.schedule(task, delay, TimeUnit.SECONDS);
 
         TimeUnit.MILLISECONDS.sleep(1337);
 
         long remainingDelay = future.getDelay(TimeUnit.MILLISECONDS);
-        System.out.printf("Remaining Delay: %sms\n", remainingDelay);
+        System.out.printf(Thread.currentThread().getName()+"=》Remaining Delay: %sms\n", remainingDelay);
     }
 
 }

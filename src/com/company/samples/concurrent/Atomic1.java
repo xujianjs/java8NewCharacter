@@ -16,8 +16,8 @@ public class Atomic1 {
 
     public static void main(String[] args) {
         testIncrement();
-        testAccumulate();
-        testUpdate();
+//        testAccumulate();
+//        testUpdate();
     }
 
     private static void testUpdate() {
