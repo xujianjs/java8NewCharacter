@@ -52,8 +52,7 @@ public class Executors3 {
                 .map(future -> {
                     try {
                         return future.get();
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         throw new IllegalStateException(e);
                     }
                 })
@@ -69,8 +68,7 @@ public class Executors3 {
             try {
                 TimeUnit.SECONDS.sleep(2);
                 System.out.println("Scheduling: " + System.nanoTime());
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 System.err.println("task interrupted");
             }
         };
@@ -108,14 +106,14 @@ public class Executors3 {
     private static void test1() throws InterruptedException {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
-        Runnable task = () -> System.out.println(Thread.currentThread().getName()+"=》Scheduling: " + System.nanoTime());
+        Runnable task = () -> System.out.println(Thread.currentThread().getName() + "=》Scheduling: " + System.nanoTime());
         int delay = 3;
         ScheduledFuture<?> future = executor.schedule(task, delay, TimeUnit.SECONDS);
 
         TimeUnit.MILLISECONDS.sleep(1337);
 
         long remainingDelay = future.getDelay(TimeUnit.MILLISECONDS);
-        System.out.printf(Thread.currentThread().getName()+"=》Remaining Delay: %sms\n", remainingDelay);
+        System.out.printf(Thread.currentThread().getName() + "=》Remaining Delay: %sms\n", remainingDelay);
     }
 
 }
